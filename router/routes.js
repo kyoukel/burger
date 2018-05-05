@@ -1,46 +1,26 @@
 var express = require("express");
 var router = express.Router();
 
-var burger = require("../models/burger.js");
+var burgercontroller = require("../controllers/burgersController");
 
-router.get("/", function(req, res) {
-    res.redirect("/burgers");
+router
+    .get("/", function(req, res) {
+        burgercontroller.all()
+            .then(data => res.render("index.handlebars", {burgers: data}))
+            .catch(err => console.log(err))
+        })
+
+    .post("/api/burgers", function(req, res) {
+    // burgercontroller.create(req.body)
+    //     .then(() => res.redirect("/"))
+    //     .catch(err => next(err))
+})
+
+    .put("/api/burgers/: id", function(req, res, next) {
+        // const {id, ...devoured } = req.body;
+        // burgercontroller.update(id, devoured)
+        // .then(data => res.json(data))
+        // .catch(err => res.json(err))
 });
 
-router.get("/burgers", function(req, res) {
-    burger.all(function(burgerData) {
-        res.render("Index", { burger_data: burgerData });
-    });
-});
-
-router.post("/burgers/create", function(req, res) {
-    burger.create(req.body.burger_name, function(result) {
-        console.log(result);
-        res.redirect("/");
-    });
-});
-
-router.put("/burgers/: id", function(req, res) {
-    burger.update(req.params.id, function(result) {
-        console.log(result);
-        res.render("index", { burger_data: burgerData });
-    });
-});
-
-
-// EXAMPLE FROM WEDS CLASS
-// const Cat = require('model')
-// module.exports = {
-//     index: () => {
-//         Cat.all()
-//     },
-//     create: (data) => {},
-//     read: (id) => {
-//         Cat.get_by_id(id);
-//     },
-//     update: (data) => {},
-//     delete: (data) => {},
-// }
-
-//index is all 
-//should have a new controller and model for every different type of http call. 
+module.exports = router;
