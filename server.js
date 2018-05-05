@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-const routes = require('./controllers/burgersController.js');
+const routes = require('./router/routes.js');
 app.use(routes);
 
 app.get("/", function(req, res) {
@@ -41,7 +41,7 @@ app.get("/burgers", function(req, res) {
   });
 });
 
-app.put("/burgers/: id", function(req, res) {
+app.put("/burgers/:id", function(req, res) {
   connection.query("UPDATE burgers SET burger_names = ? WHERE id = ?", [req.body.burger_name, req.params.id], function(err, result) {
     if (err) {
       return res.status(500).end();
