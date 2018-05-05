@@ -1,20 +1,20 @@
 const fs = require('fs');
-const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const express = require("express");
-const app = express();
 
 const PORT = process.env.PORT || 5505;
 
+const app = express();
+
+app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const exphbs = require("express-handlebars");
+
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-const routes = require('./router/routes.js');
-app.use(routes);
 
 app.get("/", function(req, res) {
   connection.query("SELECT * FROM burgers;", function(err, data) {
@@ -51,6 +51,10 @@ app.put("/burgers/:id", function(req, res) {
     res.status(200).end();
   });
 });
+
+const routes = require('./router/routes.js');
+
+app.use(routes);
 
 app.listen(PORT, function() {
   console.log("Server listening on http://localhost:" + PORT);
