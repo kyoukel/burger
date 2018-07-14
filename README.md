@@ -88,51 +88,46 @@ All the recommended files and directories from the steps above should look like 
 
 ├── config
 
-│   ├── connection.js
-│   
+    ├── connection.js
+   
     └── orm.js
 
-│ 
+ 
 ├── controllers
-│   
+   
     └── burgers_controller.js
-│
 
 ├── db
-│   
+   
     ├── schema.sql
-│   
+   
     └── seeds.sql
-│
 
 ├── models
-│   
+   
     └── burger.js
-│ 
 
 ├── node_modules
-│ 
+ 
 
 ├── package.json
-│
+
 
 ├── public
-│   
+   
     ├── assets
-│   
-    │   ├── css
-│   
-    │   │   └── burger_style.css
-│   
-    │   └── img
-│   
-    │       └── burger.png
-│   
+   
+       ├── css
+   
+           └── burger_style.css
+   
+      └── img
+   
+           └── burger.png
+   
     └── test.html
-│
 
 ├── server.js
-│
 
 └── views
 
